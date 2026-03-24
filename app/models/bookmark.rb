@@ -4,7 +4,7 @@ class Bookmark < ApplicationRecord
 
   validates :name, presence: true
 
-  before_create :set_default_name
+  before_validation :set_default_name, on: :create
 
   private
 

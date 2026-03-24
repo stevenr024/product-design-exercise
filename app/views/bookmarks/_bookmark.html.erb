@@ -1,5 +1,5 @@
 <li id="<%= dom_id(bookmark) %>" class="py-2 border-bottom d-flex align-items-center gap-2" data-sortable-target="item">
-  <i class="bi bi-grip-vertical text-muted sortable-handle" style="cursor: grab;"></i>
+  <i class="bi bi-grip-vertical text-muted sortable-handle"></i>
   <div class="flex-grow-1 min-width-0">
     <% if bookmark.bookmarkable.present? %>
       <% if local_assigns[:show_remove] %>
