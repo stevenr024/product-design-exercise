@@ -1,15 +1,33 @@
 <div class="text-center mb-4">
   <small class="text-uppercase text-muted fw-semibold letter-spacing-wide">Strety</small>
   <h2 class="fw-bold mt-1 mb-4">Community Board</h2>
-  <div class="hstack justify-content-center">
-    <div class="hstack gap-2 border rounded-pill px-4 py-3 bg-white lh-1">
-      <span class="fw-bold fs-5"><%= @total_posts %></span>
-      <span class="text-muted"><%= "Message".pluralize(@total_posts) %> Shared</span>
-    </div>
-  </div>
 </div>
 
 <hr class="mb-4">
+
+<h5 class="mb-3 text-muted fw-semibold">My Bookmarks</h5>
+
+<% if @bookmarks.any? %>
+  <ul class="bookmark-list list-unstyled mb-2">
+    <% @bookmarks.each do |bookmark| %>
+      <li class="py-2 border-bottom">
+        <% if bookmark.bookmarkable.present? %>
+          <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none" %>
+        <% else %>
+          <span class="bookmark-tombstone text-muted text-decoration-line-through">
+            <i class="bi bi-exclamation-circle me-1"></i><%= bookmark.name %>
+          </span>
+          <small class="text-muted d-block">This post has been deleted.</small>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to "View all bookmarks →", bookmarks_path, class: "text-muted small" %>
+<% else %>
+  <p class="bookmark-list-empty text-muted fst-italic">No bookmarks yet. Bookmark a post to see it here.</p>
+<% end %>
+
+<hr class="my-4">
 
 <h5 class="mb-3 text-muted fw-semibold">Recent Posts</h5>
 
