@@ -27,5 +27,4 @@ class BookmarkTest < ActiveSupport::TestCase
     assert_not_nil first.position
     assert_not_nil second.position
   end
-
 end
