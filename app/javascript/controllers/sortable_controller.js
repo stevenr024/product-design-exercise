@@ -8,7 +8,8 @@ export default class extends Controller {
   connect() {
     this.sortable = Sortable.create(this.element, {
       animation: 150,
-      handle: "[data-sortable-target='item']",
+      handle: ".sortable-handle",
+      ghostClass: "sortable-ghost",
       onEnd: this.reorder.bind(this)
     })
   }

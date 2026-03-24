@@ -41,6 +41,6 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
     get root_path
     assert_response :success
-    assert_select ".bookmark-tombstone"
+    assert_select ".text-black-50", text: bookmark.name
   end
 end

@@ -12,3 +12,17 @@ html {
 body {
   background-color: transparent;
 }
+
+.sortable-ghost {
+  opacity: 0.4;
+  background-color: $primary;
+  border-radius: 4px;
+}
+
+.sortable-handle {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
