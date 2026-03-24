@@ -1,21 +1,23 @@
 <li id="<%= dom_id(bookmark) %>" class="py-2 border-bottom d-flex align-items-center gap-2" data-sortable-target="item">
   <i class="bi bi-grip-vertical text-muted sortable-handle" style="cursor: grab;"></i>
-  <div class="flex-grow-1">
+  <div class="flex-grow-1 min-width-0">
     <% if bookmark.bookmarkable.present? %>
       <% if local_assigns[:show_remove] %>
         <%= turbo_frame_tag dom_id(bookmark, :name) do %>
-          <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none", data: { turbo_frame: "_top" } %>
+          <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none bookmark-name", title: bookmark.name, data: { turbo_frame: "_top" } %>
         <% end %>
       <% else %>
-        <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none" %>
+        <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none bookmark-name", title: bookmark.name %>
       <% end %>
     <% else %>
-      <div class="d-flex align-items-center justify-content-between gap-2 flex-grow-1">
-        <div>
-          <span class="text-black-50"><%= bookmark.name %></span>
+      <div class="d-flex align-items-center justify-content-between gap-2 flex-grow-1 min-width-0">
+        <div class="min-width-0">
+          <span class="text-black-50 bookmark-name" title="<%= bookmark.name %>"><%= bookmark.name %></span>
           <small class="text-muted d-block"><i class="bi bi-info-circle me-1"></i>The linked post has been deleted.</small>
         </div>
-        <%= button_to "Delete", bookmark_path(bookmark), method: :delete, class: "btn btn-sm btn-danger" %>
+        <% unless local_assigns[:show_remove] %>
+          <%= button_to "Delete", bookmark_path(bookmark), method: :delete, class: "btn btn-sm btn-danger flex-shrink-0" %>
+        <% end %>
       </div>
     <% end %>
   </div>

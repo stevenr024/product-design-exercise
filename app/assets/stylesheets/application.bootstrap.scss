@@ -19,6 +19,23 @@ body {
   border-radius: 4px;
 }
 
+.card-title {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.bookmark-name {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.min-width-0 {
+  min-width: 0;
+}
+
 .sortable-handle {
   cursor: grab;
 
