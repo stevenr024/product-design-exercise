@@ -2,7 +2,9 @@ class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [ :show, :edit_name, :update, :destroy ]
 
   def index
-    @bookmarks = Bookmark.includes(:bookmarkable).order(:position)
+    all = Bookmark.includes(:bookmarkable).order(:position)
+    @bookmarks = all.select { |b| b.bookmarkable.present? }
+    @tombstones = all.select { |b| b.bookmarkable.nil? }.sort_by(&:name)
   end
 
   def show

@@ -35,12 +35,12 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_select ".bookmark-list-empty"
   end
 
-  test "homepage shows tombstone for bookmark with deleted post" do
+  test "homepage hides bookmarks for deleted posts" do
     bookmark = @post1.bookmarks.create!
     @post1.delete # bypass dependent destroy
 
     get root_path
     assert_response :success
-    assert_select ".text-black-50", text: bookmark.name
+    assert_select ".bookmark-list li", 0
   end
 end

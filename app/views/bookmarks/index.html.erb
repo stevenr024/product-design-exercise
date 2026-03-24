@@ -12,3 +12,20 @@
 <% else %>
   <p class="bookmark-list-empty text-muted fst-italic">No bookmarks yet.</p>
 <% end %>
+
+<% if @tombstones.any? %>
+  <div class="mt-4">
+    <h6 class="text-muted fw-semibold mb-2">Deleted Posts</h6>
+    <ul class="list-unstyled">
+      <% @tombstones.each do |bookmark| %>
+        <li id="<%= dom_id(bookmark) %>" class="py-2 border-bottom d-flex align-items-center justify-content-between gap-2">
+          <div class="min-width-0">
+            <span class="text-black-50 bookmark-name" title="<%= bookmark.name %>"><%= bookmark.name %></span>
+            <small class="text-muted d-block"><i class="bi bi-info-circle me-1"></i>The linked post has been deleted.</small>
+          </div>
+          <%= button_to "Delete", bookmark_path(bookmark), method: :delete, class: "btn btn-sm btn-outline-danger flex-shrink-0" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
