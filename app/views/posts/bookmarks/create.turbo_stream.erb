@@ -1,7 +1,7 @@
 <%= turbo_stream.replace dom_id(@post, :bookmark) do %>
   <%= render "posts/bookmark_button", post: @post %>
 <% end %>
-<%= turbo_stream.prepend "bookmark-list" do %>
+<%= turbo_stream.append "bookmark-list" do %>
   <%= render "bookmarks/bookmark", bookmark: @bookmark %>
 <% end %>
 <%= turbo_stream.update "flash" do %>
