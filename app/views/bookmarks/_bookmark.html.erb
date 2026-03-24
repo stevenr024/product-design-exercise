@@ -1,0 +1,10 @@
+<li id="<%= dom_id(bookmark) %>" class="py-2 border-bottom">
+  <% if bookmark.bookmarkable.present? %>
+    <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none" %>
+  <% else %>
+    <span class="bookmark-tombstone text-muted text-decoration-line-through">
+      <i class="bi bi-exclamation-circle me-1"></i><%= bookmark.name %>
+    </span>
+    <small class="text-muted d-block">This post has been deleted.</small>
+  <% end %>
+</li>

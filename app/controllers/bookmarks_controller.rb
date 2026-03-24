@@ -10,6 +10,10 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
-    redirect_to bookmarks_path, notice: "Bookmark removed."
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@bookmark) }
+      format.html { redirect_to bookmarks_path, notice: "Bookmark removed." }
+    end
   end
 end

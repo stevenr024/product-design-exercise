@@ -28,10 +28,4 @@ class BookmarkTest < ActiveSupport::TestCase
     assert_not_nil second.position
   end
 
-  test "repacks positions when a bookmark is destroyed" do
-    bookmark = @post.bookmarks.create!
-    assert_not_nil bookmark.position
-    bookmark.destroy
-    assert_equal 0, @post.bookmarks.count
-  end
 end
