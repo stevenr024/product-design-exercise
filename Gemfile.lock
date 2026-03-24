@@ -179,6 +179,9 @@ GEM
     parser (3.3.10.2)
       ast (~> 2.4.1)
       racc
+    positioning (0.4.7)
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
@@ -345,6 +348,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  positioning
   propshaft
   puma (>= 5.0)
   rails (~> 8.1.2)
