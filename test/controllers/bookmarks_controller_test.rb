@@ -40,4 +40,14 @@ class BookmarksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "turbo-stream[action='remove'][target='#{dom_id(@bookmark1)}']", 0
   end
+
+  test "update saves new name" do
+    patch bookmark_path(@bookmark1), params: { bookmark: { name: "My custom name" } }
+    assert_equal "My custom name", @bookmark1.reload.name
+  end
+
+  test "update falls back to post title if name is blank" do
+    patch bookmark_path(@bookmark1), params: { bookmark: { name: "" } }
+    assert_equal @post1.title, @bookmark1.reload.name
+  end
 end

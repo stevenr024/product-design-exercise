@@ -1,7 +1,13 @@
 <li id="<%= dom_id(bookmark) %>" class="py-2 border-bottom d-flex justify-content-between align-items-center" data-sortable-target="item">
-  <div>
+  <div class="flex-grow-1 me-3">
     <% if bookmark.bookmarkable.present? %>
-      <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none" %>
+      <% if local_assigns[:show_remove] %>
+        <%= turbo_frame_tag dom_id(bookmark, :name) do %>
+          <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none" %>
+        <% end %>
+      <% else %>
+        <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none" %>
+      <% end %>
     <% else %>
       <span class="bookmark-tombstone text-muted text-decoration-line-through">
         <i class="bi bi-exclamation-circle me-1"></i><%= bookmark.name %>
@@ -10,6 +16,9 @@
     <% end %>
   </div>
   <% if local_assigns[:show_remove] %>
-    <%= button_to "Remove", bookmark_path(bookmark), method: :delete, class: "btn btn-sm btn-link text-muted p-0" %>
+    <div class="d-flex gap-2">
+      <%= link_to "Rename", edit_name_bookmark_path(bookmark), class: "btn btn-sm btn-primary", data: { turbo_frame: dom_id(bookmark, :name) } %>
+      <%= button_to "Delete", bookmark_path(bookmark), method: :delete, class: "btn btn-sm btn-danger" %>
+    </div>
   <% end %>
 </li>
