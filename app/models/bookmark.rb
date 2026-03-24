@@ -2,6 +2,8 @@ class Bookmark < ApplicationRecord
   belongs_to :bookmarkable, polymorphic: true
   positioned on: :bookmarkable
 
+  validates :name, presence: true
+
   before_create :set_default_name
 
   private
