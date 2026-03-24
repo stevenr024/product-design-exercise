@@ -3,6 +3,13 @@ class BookmarksController < ApplicationController
     @bookmarks = Bookmark.includes(:bookmarkable).order(:position)
   end
 
+  def reorder
+    params[:ids].each_with_index do |id, index|
+      Bookmark.where(id: id).update_all(position: index + 1)
+    end
+    head :ok
+  end
+
   def show
     @bookmark = Bookmark.find(params[:id])
   end

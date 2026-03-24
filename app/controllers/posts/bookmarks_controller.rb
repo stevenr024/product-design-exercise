@@ -12,6 +12,7 @@ module Posts
     end
 
     def destroy
+      @bookmark = @post.bookmarks.first
       @post.bookmarks.destroy_all
 
       respond_to do |format|

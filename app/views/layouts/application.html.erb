@@ -45,12 +45,16 @@
     </nav>
 
     <div class="container flex-grow-1">
-      <% if notice.present? %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%= notice %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      <% end %>
+      <div id="flash" class="toast-container position-fixed top-0 end-0 p-3">
+        <% if notice.present? %>
+          <div class="toast" role="alert" data-controller="toast" data-bs-delay="3000">
+            <div class="toast-body d-flex justify-content-between align-items-center">
+              <%= notice %>
+              <button type="button" class="btn-close ms-2" data-bs-dismiss="toast"></button>
+            </div>
+          </div>
+        <% end %>
+      </div>
 
       <%= yield %>
     </div>
