@@ -1,0 +1,18 @@
+<li id="<%= dom_id(bookmark) %>" class="py-2 border-bottom d-flex align-items-center gap-2" data-sortable-target="item">
+  <i class="bi bi-grip-vertical text-muted sortable-handle"></i>
+  <div class="flex-grow-1 min-width-0">
+    <% if local_assigns[:show_remove] %>
+      <%= turbo_frame_tag dom_id(bookmark, :name) do %>
+        <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none bookmark-name", title: bookmark.name, data: { turbo_frame: "_top" } %>
+      <% end %>
+    <% else %>
+      <%= link_to bookmark.name, bookmark.bookmarkable, class: "text-decoration-none bookmark-name", title: bookmark.name %>
+    <% end %>
+  </div>
+  <% if local_assigns[:show_remove] %>
+    <div class="d-flex gap-2">
+      <%= link_to "Rename", edit_name_bookmark_path(bookmark), class: "btn btn-sm btn-primary", data: { turbo_frame: dom_id(bookmark, :name) } %>
+      <%= button_to "Delete", bookmark_path(bookmark), method: :delete, class: "btn btn-sm btn-danger" %>
+    </div>
+  <% end %>
+</li>

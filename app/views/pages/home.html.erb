@@ -1,3 +1,7 @@
+<%= content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
 <div class="text-center mb-4">
   <small class="text-uppercase text-muted fw-semibold letter-spacing-wide">Strety</small>
   <h2 class="fw-bold mt-1 mb-4">Community Board</h2>
@@ -29,3 +33,18 @@
     </div>
   <% end %>
 </div>
+
+<hr class="my-4">
+
+<h5 class="mb-3 text-muted fw-semibold">My Bookmarks</h5>
+
+<% if @bookmarks.any? %>
+  <ul id="bookmark-list" class="bookmark-list list-unstyled mb-2" data-controller="sortable" data-sortable-url-value="<%= reorder_bookmarks_path %>">
+    <%= render @bookmarks %>
+  </ul>
+  <%= link_to "View all bookmarks →", bookmarks_path, class: "text-muted small" %>
+<% else %>
+  <p class="bookmark-list-empty text-muted fst-italic">No bookmarks yet. Bookmark a post to see it here.</p>
+<% end %>
+
+<div class="pb-4"></div>

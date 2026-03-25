@@ -1,0 +1,35 @@
+<%= content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0">My Bookmarks</h2>
+  <%= link_to "← Home", root_path, class: "text-muted text-decoration-none" %>
+</div>
+
+<% if @bookmarks.any? %>
+  <ul class="bookmark-list list-unstyled" data-controller="sortable" data-sortable-url-value="<%= reorder_bookmarks_path %>">
+    <% @bookmarks.each do |bookmark| %>
+      <%= render bookmark, show_remove: true %>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="bookmark-list-empty text-muted fst-italic">No bookmarks yet.</p>
+<% end %>
+
+<% if @tombstones.any? %>
+  <div class="mt-4">
+    <h6 class="text-muted fw-semibold mb-2">Deleted Posts</h6>
+    <ul class="list-unstyled">
+      <% @tombstones.each do |bookmark| %>
+        <li id="<%= dom_id(bookmark) %>" class="py-2 border-bottom d-flex align-items-center justify-content-between gap-2">
+          <div class="min-width-0">
+            <span class="text-black-50 bookmark-name" title="<%= bookmark.name %>"><%= bookmark.name %></span>
+            <small class="text-muted d-block"><i class="bi bi-info-circle me-1"></i>The linked post has been deleted.</small>
+          </div>
+          <%= button_to "Delete", bookmark_path(bookmark), method: :delete, class: "btn btn-sm btn-outline-danger flex-shrink-0" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

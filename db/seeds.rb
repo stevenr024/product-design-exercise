@@ -27,9 +27,17 @@ posts_data.each do |data|
   end
 end
 
-first_post = Post.order(:created_at).first
-unless first_post.bookmarks.exists?
-  first_post.bookmarks.create!
+Bookmark.destroy_all
+
+bookmarked_titles = [
+  "Ideas for making check-ins less painful?",
+  "Our team went from zero visibility to full alignment in 3 weeks",
+  "How I set up my weekly planning ritual in Strety"
+]
+
+bookmarked_titles.each do |title|
+  post = Post.find_by!(title: title)
+  post.bookmarks.create!(name: post.title)
 end
 
 puts "Seeded #{Post.count} posts and #{Bookmark.count} bookmark(s)."

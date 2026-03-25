@@ -1,3 +1,14 @@
 <%= turbo_stream.replace dom_id(@post, :bookmark) do %>
   <%= render "posts/bookmark_button", post: @post %>
 <% end %>
+<%= turbo_stream.append "bookmark-list" do %>
+  <%= render "bookmarks/bookmark", bookmark: @bookmark %>
+<% end %>
+<%= turbo_stream.update "flash" do %>
+  <div class="toast" role="alert" data-controller="toast" data-bs-delay="3000">
+    <div class="toast-body d-flex justify-content-between align-items-center">
+      Bookmark added.
+      <button type="button" class="btn-close ms-2" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+<% end %>

@@ -3,7 +3,7 @@ module Posts
     before_action :set_post
 
     def create
-      @bookmark = @post.bookmarks.create!
+      @bookmark = @post.bookmarks.create!(name: @post.title)
 
       respond_to do |format|
         format.turbo_stream
@@ -12,6 +12,7 @@ module Posts
     end
 
     def destroy
+      @bookmark = @post.bookmarks.first
       @post.bookmarks.destroy_all
 
       respond_to do |format|

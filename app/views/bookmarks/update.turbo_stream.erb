@@ -1,0 +1,5 @@
+<%= turbo_stream.replace dom_id(@bookmark, :name) do %>
+  <%= turbo_frame_tag dom_id(@bookmark, :name) do %>
+    <%= link_to @bookmark.name, @bookmark.bookmarkable, class: "text-decoration-none", data: { turbo_frame: "_top" } %>
+  <% end %>
+<% end %>
