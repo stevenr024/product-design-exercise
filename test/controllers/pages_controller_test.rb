@@ -15,7 +15,8 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     assert_select ".bookmark-list li", minimum: 2
-    assert response.body.index(@post1.title) < response.body.index(@post2.title)
+    bookmark_list_html = css_select(".bookmark-list").to_s
+    assert bookmark_list_html.index(@post1.title) < bookmark_list_html.index(@post2.title)
   end
 
   test "homepage shows at most 10 bookmarks" do
